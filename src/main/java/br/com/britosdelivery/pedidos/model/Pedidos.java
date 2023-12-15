@@ -1,24 +1,33 @@
 package br.com.britosdelivery.pedidos.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class Pedidos {
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "pedidos")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Positive
-    private Integer quantidade;
-
-    private String descricao;
-    @ManyToOne(optional = false)
-    private Pedidos Pedidos;
-
+    private LocalDateTime dataHora;
+    @NotNull @Enumerated(EnumType.STRING)
+    private Status status;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pedidos")
+    private List<ItemPedido> itens = new ArrayList<>();
 
 }
