@@ -10,12 +10,12 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "pedidos")
+@Table(name = "item_do_pedido")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemPedido {
+public class ItemDoPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +26,7 @@ public class ItemPedido {
     private String descricao;
 
     @ManyToOne(optional = false)
-    private Pedidos pedidos;
+    private Pedido pedido;
 
 
 }
